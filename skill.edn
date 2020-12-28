@@ -1,1 +1,7 @@
-{}
+{:namespace "atomist"
+ :homepageUrl "https://github.com/atomist-skills/k8-deploy-promotion-policy" :name "k8-deploy-promotion-policy" :displayName "k8 deploy promotion policy" :description "This section supports markdown" :author "slimslenderslacks" :license "unknown" :iconUrl "https://raw.githubusercontent.com/cljs/logo/master/cljs.png" :artifacts {:gcf [{:name "k8-deploy-promotion-policy",
+  :runtime "nodejs10",
+  :memory 512, 
+  :timeout 60, 
+  :entryPoint "eventhandler"}]
+}}
