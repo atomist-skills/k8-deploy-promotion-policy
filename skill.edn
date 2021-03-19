@@ -13,9 +13,56 @@
 ;; limitations under the License.
 
 {:namespace "atomist"
- :homepageUrl "https://github.com/atomist-skills/k8-deploy-promotion-policy" :name "k8-deploy-promotion-policy" :displayName "k8 deploy promotion policy" :description "This section supports markdown" :author "slimslenderslacks" :license "unknown" :iconUrl "https://raw.githubusercontent.com/cljs/logo/master/cljs.png" :artifacts {:gcf [{:name "k8-deploy-promotion-policy",
-  :runtime "nodejs10",
-  :memory 512, 
-  :timeout 60, 
-  :entryPoint "eventhandler"}]
-}}
+ :homepageUrl "https://github.com/atomist-skills/k8-deploy-promotion-policy"
+ :name "k8-deploy-promotion-policy"
+ :displayName "k8 deploy promotion policy"
+ :description "Transact against GitOps Repo when we detect that an Image is ready"
+ :author "slimslenderslacks"
+ :license "unknown"
+ :iconUrl "https://raw.githubusercontent.com/cljs/logo/master/cljs.png"
+ :parameters [{:multiChoice
+               {:description "Checks which must have passed before attempting jar build and publish. Leave empty for none",
+                :displayName "Checks",
+                :name "check-names",
+                :minRequired 1,
+                :options
+                [{:description "github-secret-scanner-skill"
+                  :text "github-secret-scanner-skill"
+                  :value "github-secret-scanner-skill"}
+                 {:description "docker-vulnerability-policy"
+                  :text "docker-vulnerability-policy"
+                  :value "docker-vulnerability-policy"}
+                 {:description "docker-base-image-policy/pinned"
+                  :text "docker-base-image-policy/pinned"
+                  :value "docker-base-image-policy/pinned"}
+                 {:description "docker-build-skill"
+                  :text "docker-build-skill"
+                  :value "docker-build-skill"}]
+                :required true}}
+              {:string
+               {:name "gitops-slug"
+                :description "GitOps Repo"
+                :displayName "GitOps Repo"
+                :required true}}
+              {:singleChoice
+               {:description "Programming languages that must be present to tag a commit (default all)",
+                :displayName "Repo Languages",
+                :name "repo-languages",
+                :options
+                [{:description "Python"
+                  :text "Python"
+                  :value "Python"}
+                 {:description "Clojure"
+                  :text "Clojure"
+                  :value "Clojure"}
+                 {:description "TypeScript"
+                  :text "TypeScript"
+                  :value "TypeScript"}]
+                :required true}}]
+ :artifacts
+ {:gcf
+  [{:name "k8-deploy-promotion-policy",
+    :runtime "nodejs10",
+    :memory 512,
+    :timeout 60,
+    :entryPoint "eventhandler"}]}}

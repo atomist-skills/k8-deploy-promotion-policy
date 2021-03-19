@@ -1,0 +1,22 @@
+[:find (pull ?commit [:git.commit/sha
+                      {:git.commit/repo [:git.repo/source-id
+                                         :git.repo/name
+                                         :git.provider/url
+                                         {:git.repo/org [:github.org/installation-token
+                                                         :git.org/name
+                                                         :git.provider/url]}]}])
+
+ :in $ $before-db %
+ :where
+ (tx-check-run [] ?commit ?check-run)
+
+ ;; make sure we only get triggered by our own configured checks (if set)
+ (get-config-value "check-names" [] ?check-run-names)
+ [?check-run :github.checkrun/name ?check-run-name]
+ (array-contains? ?check-run-names ?check-run-name)
+ (check-runs-passed? ?check-run-names ?commit)
+
+ ;; repo language must match (if set)
+ (get-config-value "repo-languages" [] ?languages)
+ [?commit :git.commit/repo ?repo]
+ (repo-language-match? ?languages ?repo)]

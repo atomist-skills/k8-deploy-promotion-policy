@@ -19,20 +19,40 @@
             [goog.string.format]
             [clojure.data]
             [atomist.cljs-log :as log]
+            [atomist.async :refer-macros [go-safe <?]]
             [atomist.github]))
 
-(defn custom-middleware [handler]
+(defn transact-gitops [handler]
   (fn [request]
-    (go
-      (log/info "do something useful here")
-      (<! (handler request)))))
+    (go-safe
+      (log/info "transact against %s - %s" (-> request :ref) (-> request :project :path))
+      (<? (handler request)))))
+
+(defn add-ref [handler]
+  (fn [request]
+    (go-safe
+     (let [[_ owner repo] (re-find #"(.*)/(.*)" (:gitops-slug request))]
+       (api/trace "add-ref")
+       (<? (handler (assoc request :ref {:owner owner 
+                                         :repo repo 
+                                         :branch "main"})))))))
 
 (defn ^:export handler
   [data sendreponse]
   (api/make-request
    data
    sendreponse
-   (-> (api/finished :message "----> event handler finished")
-       (custom-middleware)
+   (-> (api/finished)
+       (api/mw-dispatch {:on-checkrun.edn (-> (api/finished)
+                                              (transact-gitops)
+                                              (api/edit-inside-PR
+                                                {:branch "k8-deploy-promotion-policy"
+                                                 :target-branch "main"
+                                                 :title "k8-deploy-promotion-policy"
+                                                 :body "Ready to promote"
+                                                 :labels ["k8-deploy-promotion-policy"]})
+                                              (api/clone-ref)
+                                              (add-ref))})
+       (api/add-skill-config)
        (api/log-event)
        (api/status))))
