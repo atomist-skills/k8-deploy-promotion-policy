@@ -39,8 +39,8 @@
      (let [f (io/file (-> request :project :path) "deploy/base/clj-test-deployment.yaml")]
        (io/spit f (-> (io/slurp f)
                       (s/replace #"image: ([\w./@:-_]*)" (fn [[_ v]]
-                                                         (log/info "updating " v)
-                                                         (gstring/format "image: %s" (:atomist/target-image request))))))
+                                                           (log/info "updating " v)
+                                                           (gstring/format "image: %s" (:atomist/target-image request))))))
        (<? (handler (assoc request
                            :atomist/status {:code 0 :reason "GitOps transaction"})))))))
 
