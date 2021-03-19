@@ -31,7 +31,7 @@
      (log/info "transact against %s - %s" (-> request :ref) (-> request :project :path))
      (let [f (io/file (-> request :project :path) "deploy/base/clj-test-deployment.yaml")]
        (io/spit f (-> (io/slurp f)
-                      (s/replace #"image: (\w*)" (fn [[_ v]] 
+                      (s/replace #"image: (\w*)" (fn [[_ v]]
                                                    (log/info "updating " v)
                                                    (gstring/format "image: %s")))))
        (<? (handler (assoc request
@@ -56,7 +56,7 @@
                            (gstring/format
                             "%s/%s@%s"
                             (:docker.repository/host repository)
-                            (:docker.repository/repository repository) 
+                            (:docker.repository/repository repository)
                             digest))))))))
 
 (defn ^:export handler
