@@ -84,5 +84,4 @@
 
 (comment
   (enable-console-print!)
-  (lr/callEventHandler #js {} handler)
-  )
+  (lr/callEventHandler #js {} handler))
