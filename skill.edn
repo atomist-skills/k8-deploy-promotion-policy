@@ -44,10 +44,11 @@
                 :description "GitOps Repo"
                 :displayName "GitOps Repo"
                 :required true}}
-              {:singleChoice
+              {:multiChoice
                {:description "Programming languages that must be present to tag a commit (default all)",
                 :displayName "Repo Languages",
                 :name "repo-languages",
+                :minRequired 0
                 :options
                 [{:description "Python"
                   :text "Python"
