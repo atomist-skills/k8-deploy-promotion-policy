@@ -22,6 +22,7 @@
             [goog.string :as gstring]
             [clojure.data]
             [atomist.cljs-log :as log]
+            [atomist.local-runner :as lr]
             [atomist.async :refer-macros [go-safe <?]]
             [atomist.github]))
 
@@ -75,7 +76,13 @@
                                                 :body "Ready to promote"
                                                 :labels ["k8-deploy-promotion-policy"]})
                                               (api/clone-ref)
+                                              (api/extract-github-token)
                                               (add-ref))})
        (api/add-skill-config)
        (api/log-event)
        (api/status))))
+
+(comment
+  (enable-console-print!)
+  (lr/callEventHandler #js {} handler)
+  )
