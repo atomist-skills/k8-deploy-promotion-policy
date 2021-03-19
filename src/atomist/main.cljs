@@ -26,15 +26,21 @@
             [atomist.async :refer-macros [go-safe <?]]
             [atomist.github]))
 
+(comment
+  (s/replace "image: gcr.io/whatever/whatever:tag@shat25:blah hey" #"image: ([\w./@:-]*)"
+             (fn [[_ v]]
+               (log/info "updating " v)
+               (gstring/format "image: %s" "yo"))))
+
 (defn transact-gitops [handler]
   (fn [request]
     (go-safe
-     (log/info "transact against %s - %s" (-> request :ref) (-> request :project :path))
+     (log/infof "transact against %s - %s" (-> request :ref) (-> request :project :path))
      (let [f (io/file (-> request :project :path) "deploy/base/clj-test-deployment.yaml")]
        (io/spit f (-> (io/slurp f)
-                      (s/replace #"image: (\w*)" (fn [[_ v]]
-                                                   (log/info "updating " v)
-                                                   (gstring/format "image: %s")))))
+                      (s/replace #"image: ([\w./@:-_]*)" (fn [[_ v]]
+                                                         (log/info "updating " v)
+                                                         (gstring/format "image: %s" (:atomist/target-image request))))))
        (<? (handler (assoc request
                            :atomist/status {:code 0 :reason "GitOps transaction"})))))))
 
@@ -60,6 +66,14 @@
                             (:docker.repository/repository repository)
                             digest))))))))
 
+(defn error-handler [handler]
+  (fn [request]
+    (go
+      (try
+        (<? (handler request))
+        (catch :default ex
+          (assoc request :atomist/status {:code 1 :reason (str ex)}))))))
+
 (defn ^:export handler
   [data sendreponse]
   (api/make-request
@@ -78,6 +92,7 @@
                                               (api/clone-ref)
                                               (api/extract-github-token)
                                               (add-ref))})
+       (error-handler)
        (api/add-skill-config)
        (api/log-event)
        (api/status))))
