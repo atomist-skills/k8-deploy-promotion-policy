@@ -1,11 +1,15 @@
-[:find (pull ?commit [:git.commit/sha
-                      {:git.commit/repo [:git.repo/source-id
-                                         :git.repo/name
-                                         :git.provider/url
-                                         {:git.repo/org [:github.org/installation-token
-                                                         :git.org/name
-                                                         :git.provider/url]}]}])
-
+[:find
+ (pull ?commit [:git.commit/sha
+                {:git.commit/repo [:git.repo/source-id
+                                   :git.repo/name
+                                   :git.provider/url
+                                   {:git.repo/org [:github.org/installation-token
+                                                   :git.org/name
+                                                   :git.provider/url]}]}])
+ (pull ?image [:docker.image/digest
+               {:docker.image/repository
+                [:docker.repository/host
+                 :docker.repository/repository]}])
  :in $ $before-db %
  :where
  (tx-check-run [] ?commit ?check-run)
@@ -19,4 +23,7 @@
  ;; repo language must match (if set)
  (get-config-value "repo-languages" [] ?languages)
  [?commit :git.commit/repo ?repo]
- (repo-language-match? ?languages ?repo)]
+ (repo-language-match? ?languages ?repo)
+
+ [?commit :git.commit/sha ?sha]
+ [?image :docker.image/sha ?sha]]

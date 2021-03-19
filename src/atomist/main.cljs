@@ -16,7 +16,10 @@
   (:require [atomist.api :as api]
             [cljs.pprint :refer [pprint]]
             [cljs.core.async :refer [<!] :refer-macros [go]]
+            [clojure.string :as s]
+            [cljs-node-io.core :as io]
             [goog.string.format]
+            [goog.string :as gstring]
             [clojure.data]
             [atomist.cljs-log :as log]
             [atomist.async :refer-macros [go-safe <?]]
@@ -26,7 +29,13 @@
   (fn [request]
     (go-safe
      (log/info "transact against %s - %s" (-> request :ref) (-> request :project :path))
-     (<? (handler request)))))
+     (let [f (io/file (-> request :project :path) "deploy/base/clj-test-deployment.yaml")]
+       (io/spit f (-> (io/slurp f)
+                      (s/replace #"image: (\w*)" (fn [[_ v]] 
+                                                   (log/info "updating " v)
+                                                   (gstring/format "image: %s")))))
+       (<? (handler (assoc request
+                           :atomist/status {:code 0 :reason "GitOps transaction"})))))))
 
 (defn add-ref [handler]
   (fn [request]
@@ -37,6 +46,19 @@
                                          :repo repo
                                          :branch "main"})))))))
 
+(defn add-target-image [handler]
+  (fn [request]
+    (go-safe
+     (let [[_ {:docker.image/keys [digest repository]}] (-> request :subscription :result first)]
+       (api/trace (gstring/format "add-target-image %s %s" digest repository))
+       (<? (handler (assoc request
+                           :atomist/target-image
+                           (gstring/format
+                            "%s/%s@%s"
+                            (:docker.repository/host repository)
+                            (:docker.repository/repository repository) 
+                            digest))))))))
+
 (defn ^:export handler
   [data sendreponse]
   (api/make-request
@@ -45,6 +67,7 @@
    (-> (api/finished)
        (api/mw-dispatch {:on-checkrun.edn (-> (api/finished)
                                               (transact-gitops)
+                                              (add-target-image)
                                               (api/edit-inside-PR
                                                {:branch "k8-deploy-promotion-policy"
                                                 :target-branch "main"
