@@ -27,7 +27,7 @@
             [atomist.github]))
 
 (comment
-  (s/replace "image: gcr.io/personalsdm-216019/cj-test-docker:758deb5c0d127901fddc6ff49be76561dbc9e131\n" 
+  (s/replace "image: gcr.io/personalsdm-216019/cj-test-docker:758deb5c0d127901fddc6ff49be76561dbc9e131\n"
              #"image: ([\w./@:\-_]*)"
              (fn [[_ v]]
                (log/info "updating " v)
