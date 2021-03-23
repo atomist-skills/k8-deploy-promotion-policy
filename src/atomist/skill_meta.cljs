@@ -3,6 +3,6 @@
 
 (def module-name "k8-deploy-promotion-policy")
 (def path ".")
-(def version "0.1.12")
-(def tag "0.1.12")
-(def generated-at "2021-03-20T01:20:56Z")
+(def version "0.1.13")
+(def tag "0.1.13")
+(def generated-at "2021-03-23T23:06:20Z")
