@@ -18,7 +18,7 @@ This page details all runtime dependencies of `atomist-skill`.
 | [GPL-3.0](#gpl-30)              | 1     |
 | [ISC](#isc)                     | 45    |
 | [MIT AND Zlib](#mit-and-zlib)   | 1     |
-| [MIT](#mit)                     | 587   |
+| [MIT](#mit)                     | 588   |
 | [Public Domain](#public-domain) | 1     |
 | [Python-2.0](#python-20)        | 1     |
 | [UNKNOWN](#unknown)             | 1     |
@@ -49,8 +49,8 @@ Apache License 2.0 - [http://www.apache.org/licenses/LICENSE-2.0](http://www.apa
 | `@google-cloud/projectify`            | `2.0.1`      | Google Inc.           | [https://github.com/googleapis/nodejs-projectify](https://github.com/googleapis/nodejs-projectify)                               |
 | `@google-cloud/promisify`             | `2.0.3`      | Google Inc.           | [https://github.com/googleapis/nodejs-promisify](https://github.com/googleapis/nodejs-promisify)                                 |
 | `@google-cloud/pubsub`                | `2.10.0`     | Google Inc.           | [https://github.com/googleapis/nodejs-pubsub](https://github.com/googleapis/nodejs-pubsub)                                       |
-| `@google-cloud/storage`               | `5.8.1`      | Google Inc.           | [https://github.com/googleapis/nodejs-storage](https://github.com/googleapis/nodejs-storage)                                     |
 | `@google-cloud/storage`               | `5.8.3`      | Google Inc.           | [https://github.com/googleapis/nodejs-storage](https://github.com/googleapis/nodejs-storage)                                     |
+| `@google-cloud/storage`               | `5.8.4`      | Google Inc.           | [https://github.com/googleapis/nodejs-storage](https://github.com/googleapis/nodejs-storage)                                     |
 | `@grpc/grpc-js`                       | `1.1.8`      | Google Inc.           | [https://github.com/grpc/grpc-node/tree/master/packages/grpc-js](https://github.com/grpc/grpc-node/tree/master/packages/grpc-js) |
 | `@grpc/proto-loader`                  | `0.5.5`      | Google Inc.           | [https://github.com/grpc/grpc-node](https://github.com/grpc/grpc-node)                                                           |
 | `@grpc/proto-loader`                  | `0.6.0-pre9` | Google Inc.           | [https://github.com/grpc/grpc-node](https://github.com/grpc/grpc-node)                                                           |
@@ -434,6 +434,7 @@ MIT License - [https://opensource.org/licenses/MIT](https://opensource.org/licen
 | `d64`                                                | `1.0.0`        | Dominic Tarr                   | [https://github.com/dominictarr/d64](https://github.com/dominictarr/d64)                                                                                                                             |
 | `dataloader`                                         | `2.0.0`        |                                | [https://github.com/graphql/dataloader](https://github.com/graphql/dataloader)                                                                                                                       |
 | `date-and-time`                                      | `0.14.2`       | KNOWLEDGECODE                  | [https://github.com/knowledgecode/date-and-time](https://github.com/knowledgecode/date-and-time)                                                                                                     |
+| `date-and-time`                                      | `1.0.0`        | KNOWLEDGECODE                  | [https://github.com/knowledgecode/date-and-time](https://github.com/knowledgecode/date-and-time)                                                                                                     |
 | `date-fns`                                           | `1.30.1`       | Sasha Koss                     | [https://github.com/date-fns/date-fns](https://github.com/date-fns/date-fns)                                                                                                                         |
 | `debounce`                                           | `1.2.1`        |                                | [https://github.com/component/debounce](https://github.com/component/debounce)                                                                                                                       |
 | `debug`                                              | `4.3.1`        | TJ Holowaychuk                 | [https://github.com/visionmedia/debug](https://github.com/visionmedia/debug)                                                                                                                         |
@@ -832,7 +833,7 @@ Python License 2.0 - [https://opensource.org/licenses/Python-2.0](https://openso
 
 | Name                | Version  | Publisher       | Repository |
 | ------------------- | -------- | --------------- | ---------- |
-| `@atomist/api-cljs` | `0.5.36` | jim@atomist.com |            |
+| `@atomist/api-cljs` | `0.5.39` | jim@atomist.com |            |
 
 ## Contact
 
