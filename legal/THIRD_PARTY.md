@@ -9,7 +9,7 @@ This page details all runtime dependencies of `atomist-skill`.
 | License                         | Count |
 | ------------------------------- | ----- |
 | [0BSD](#0bsd)                   | 4     |
-| [Apache-2.0](#apache-20)        | 46    |
+| [Apache-2.0](#apache-20)        | 38    |
 | [BSD-2-Clause](#bsd-2-clause)   | 10    |
 | [BSD-3-Clause](#bsd-3-clause)   | 23    |
 | [CC-BY-4.0](#cc-by-40)          | 1     |
@@ -40,7 +40,6 @@ Apache License 2.0 - [http://www.apache.org/licenses/LICENSE-2.0](http://www.apa
 
 | Name                                  | Version          | Publisher             | Repository                                                                                                                       |
 | ------------------------------------- | ---------------- | --------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| `@atomist/skill-logging`              | `1.0.3`          | Atomist, Inc.         | [https://github.com/atomist-skills/skill-logging](https://github.com/atomist-skills/skill-logging)                               |
 | `@atomist/skill-logging`              | `1.0.4`          | Atomist, Inc.         | [https://github.com/atomist-skills/skill-logging](https://github.com/atomist-skills/skill-logging)                               |
 | `@atomist/skill`                      | `0.10.1-main.30` | Atomist, Inc.         | [https://github.com/atomist-skills/skill](https://github.com/atomist-skills/skill)                                               |
 | `@atomist/slack-messages`             | `1.2.2`          | Atomist               | [https://github.com/atomist/slack-messages](https://github.com/atomist/slack-messages)                                           |
@@ -50,7 +49,6 @@ Apache License 2.0 - [http://www.apache.org/licenses/LICENSE-2.0](http://www.apa
 | `@google-cloud/precise-date`          | `2.0.3`          | Google Inc.           | [https://github.com/googleapis/nodejs-precise-date](https://github.com/googleapis/nodejs-precise-date)                           |
 | `@google-cloud/projectify`            | `2.0.1`          | Google Inc.           | [https://github.com/googleapis/nodejs-projectify](https://github.com/googleapis/nodejs-projectify)                               |
 | `@google-cloud/promisify`             | `2.0.3`          | Google Inc.           | [https://github.com/googleapis/nodejs-promisify](https://github.com/googleapis/nodejs-promisify)                                 |
-| `@google-cloud/pubsub`                | `2.10.0`         | Google Inc.           | [https://github.com/googleapis/nodejs-pubsub](https://github.com/googleapis/nodejs-pubsub)                                       |
 | `@google-cloud/pubsub`                | `2.11.0`         | Google Inc.           | [https://github.com/googleapis/nodejs-pubsub](https://github.com/googleapis/nodejs-pubsub)                                       |
 | `@google-cloud/storage`               | `5.8.4`          | Google Inc.           | [https://github.com/googleapis/nodejs-storage](https://github.com/googleapis/nodejs-storage)                                     |
 | `@grpc/grpc-js`                       | `1.1.8`          | Google Inc.           | [https://github.com/grpc/grpc-node/tree/master/packages/grpc-js](https://github.com/grpc/grpc-node/tree/master/packages/grpc-js) |
@@ -58,14 +56,8 @@ Apache License 2.0 - [http://www.apache.org/licenses/LICENSE-2.0](http://www.apa
 | `@grpc/proto-loader`                  | `0.6.0-pre9`     | Google Inc.           | [https://github.com/grpc/grpc-node](https://github.com/grpc/grpc-node)                                                           |
 | `@opencensus/core`                    | `0.0.22`         | Google Inc.           | [https://github.com/census-instrumentation/opencensus-node](https://github.com/census-instrumentation/opencensus-node)           |
 | `@opencensus/propagation-stackdriver` | `0.0.22`         | OpenCensus Authors    | [https://github.com/census-instrumentation/opencensus-node](https://github.com/census-instrumentation/opencensus-node)           |
-| `@opentelemetry/api`                  | `0.12.0`         | OpenTelemetry Authors | [https://github.com/open-telemetry/opentelemetry-js](https://github.com/open-telemetry/opentelemetry-js)                         |
 | `@opentelemetry/api`                  | `0.18.1`         | OpenTelemetry Authors | [https://github.com/open-telemetry/opentelemetry-js-api](https://github.com/open-telemetry/opentelemetry-js-api)                 |
-| `@opentelemetry/context-base`         | `0.12.0`         | OpenTelemetry Authors | [https://github.com/open-telemetry/opentelemetry-js](https://github.com/open-telemetry/opentelemetry-js)                         |
-| `@opentelemetry/core`                 | `0.12.0`         | OpenTelemetry Authors | [https://github.com/open-telemetry/opentelemetry-js](https://github.com/open-telemetry/opentelemetry-js)                         |
-| `@opentelemetry/resources`            | `0.12.0`         | OpenTelemetry Authors | [https://github.com/open-telemetry/opentelemetry-js](https://github.com/open-telemetry/opentelemetry-js)                         |
-| `@opentelemetry/semantic-conventions` | `0.12.0`         | OpenTelemetry Authors | [https://github.com/open-telemetry/opentelemetry-js](https://github.com/open-telemetry/opentelemetry-js)                         |
 | `@opentelemetry/semantic-conventions` | `0.18.2`         | OpenTelemetry Authors | [https://github.com/open-telemetry/opentelemetry-js](https://github.com/open-telemetry/opentelemetry-js)                         |
-| `@opentelemetry/tracing`              | `0.12.0`         | OpenTelemetry Authors | [https://github.com/open-telemetry/opentelemetry-js](https://github.com/open-telemetry/opentelemetry-js)                         |
 | `before-after-hook`                   | `2.2.1`          | Gregor Martynus       | [https://github.com/gr2m/before-after-hook](https://github.com/gr2m/before-after-hook)                                           |
 | `bser`                                | `2.1.1`          | Wez Furlong           | [https://github.com/facebook/watchman](https://github.com/facebook/watchman)                                                     |
 | `ecdsa-sig-formatter`                 | `1.0.11`         | D2L Corporation       | [https://github.com/Brightspace/node-ecdsa-sig-formatter](https://github.com/Brightspace/node-ecdsa-sig-formatter)               |
@@ -845,7 +837,7 @@ Python License 2.0 - [https://opensource.org/licenses/Python-2.0](https://openso
 
 | Name                | Version  | Publisher       | Repository |
 | ------------------- | -------- | --------------- | ---------- |
-| `@atomist/api-cljs` | `0.5.46` | jim@atomist.com |            |
+| `@atomist/api-cljs` | `0.5.51` | jim@atomist.com |            |
 
 ## Contact
 
