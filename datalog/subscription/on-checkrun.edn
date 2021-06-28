@@ -10,18 +10,18 @@
                {:docker.image/repository
                 [:docker.repository/host
                  :docker.repository/repository]}])
- :in $ $before-db %
+ :in $ $before-db % ?ctx
  :where
- (tx-check-run [] ?commit ?check-run)
+ (check-run-tx ?ctx [] ?commit ?check-run)
 
  ;; make sure we only get triggered by our own configured checks (if set)
- (get-config-value "check-names" [] ?check-run-names)
+ (get-skill-config-value ?ctx "check-names" [] ?check-run-names)
  [?check-run :github.checkrun/name ?check-run-name]
  (array-contains? ?check-run-names ?check-run-name)
  (check-runs-passed? ?check-run-names ?commit)
 
  ;; repo language must match (if set)
- (get-config-value "repo-languages" [] ?languages)
+ (get-skill-config-value ?ctx "repo-languages" [] ?languages)
  [?commit :git.commit/repo ?repo]
  (repo-language-match? ?languages ?repo)
 
